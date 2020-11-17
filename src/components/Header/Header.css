@@ -1,8 +1,20 @@
 header{
     display: flex;
     justify-content: space-between;
+    height: 60px;
+    box-shadow: 0 0 2px #aaa;
+    margin-bottom: 2px;
+    align-items: center;
+    background-color: #000;
+    color:#fff;
+    padding:3px;
 }
 
 .logo{
     margin:auto;
+}
+
+.icon{
+    height: 40px;
+    /* height: 50px; */
 }
