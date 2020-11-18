@@ -1,0 +1,40 @@
+.cart{
+    
+    margin:10px
+}
+.drug-info{
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding:10px;
+    // border:1px solid #eee;
+    .price{
+        color:#12e7dd;
+        font-weight: 400;
+        font-size: 1.5rem;
+    }
+    .smn{
+        color:#12e7dd;
+        font-weight: 400;
+        font-size: 1rem;
+    }
+    .qty{
+        flex-grow: 1;
+        
+        font-size: 1.5rem;
+        color: #a3a1a1;
+       .count{
+            color:#12e7dd;
+            width:40px;
+            margin:0 20px;
+       }
+
+    }
+
+    .order{
+        background-color: #12e7dd;
+        color:#fff;
+        padding:3px 10px;
+        border-radius: 15px;
+    }
+}

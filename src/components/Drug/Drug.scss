@@ -1,0 +1,54 @@
+.cart{
+    display:flex;
+    flex-direction: column;
+    margin:10px;
+    padding:5px;
+    box-shadow: 0 1px 2px #ccc;
+    h3{
+        align-self: flex-start;
+        margin-bottom: 0;
+    }
+    p{
+        margin: 0;
+        text-align: left;
+        align-self: flex-start;
+    }
+    .type{
+        align-self: flex-start; 
+        font-size: 0.8rem;
+        color:#aaa;
+    }
+    .drug-info{
+        display:flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        padding:10px;
+        color:#12e7dd;
+       
+        .price{
+            font-weight: 400;
+            font-size: 1.5rem;
+        }
+        .smn{
+            font-weight: 400;
+            font-size: 1rem;
+        }
+        .qty{
+            flex-grow: 1;
+            font-size: 1.5rem;
+            color: #a3a1a1;
+           .count{
+                width:40px;
+                margin:0 20px;
+           }
+    
+        }
+    
+        .order{
+            background-color: #12e7dd;
+            color:#fff;
+            padding:3px 10px;
+            border-radius: 15px;
+        }
+    }
+}
