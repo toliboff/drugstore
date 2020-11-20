@@ -20,7 +20,7 @@ const Categories=()=>{
 
        
     return(<div>
-        {categories.map((cat)=><a href={cat.url}>
+        {categories.map((cat)=><a href={cat.url} key={cat.name}>
                                     <div  className='category' style={{backgroundImage:`url(${cat.background}` }} >
                                        <h2>{cat.name}</h2>
                                             

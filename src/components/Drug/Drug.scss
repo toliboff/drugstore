@@ -1,4 +1,4 @@
-.cart{
+.product{
     display:flex;
     flex-direction: column;
     margin:10px;
@@ -37,9 +37,15 @@
             flex-grow: 1;
             font-size: 1.5rem;
             color: #a3a1a1;
+            input{
+                text-align: center;
+                font-size: inherit;
+                border:1px solid #eee;
+                
+            }
            .count{
-                width:40px;
-                margin:0 20px;
+                // width:40px;
+                // margin:0 20px;
            }
     
         }

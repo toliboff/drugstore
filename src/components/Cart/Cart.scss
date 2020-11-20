@@ -1,0 +1,99 @@
+.cart{
+   .destination{
+       display: flex;
+       justify-content: space-between;
+
+       select{
+           width: 50%;;
+       }
+   }
+   .delivery-and-price{
+       color: rgb(134, 133, 133);
+       display: flex;
+       flex-direction: column;
+       div{
+           display: flex;
+           justify-content: space-between;
+           input{
+               border:none;
+               outline: none;
+               text-align: right;
+               color: inherit;
+           }
+       }
+   }
+
+   .total{
+       display: flex;
+       justify-content: space-between;
+       font-weight: 700;
+       font-size: 1.4rem;
+       border-top: 1px solid rgb(112, 111, 111);
+       margin: 15px 0;
+       padding: 15px 0;
+       
+       input{
+            font-size: inherit;
+            font-weight: inherit;
+            text-align: right;
+            width: 20%;
+            border: none;
+       }
+   }
+}
+.delete{
+   position:absolute;
+   top:5px;
+   right:5px;
+   width: 15px;
+
+
+}
+.cart-items{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border-bottom:1px solid #eee;
+    margin: 5px 0; 
+    section{
+        display: flex;
+       
+        img{
+        // width: 75px;
+        height: 75px;
+        }
+        .price-qty{
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+           
+        
+           .price-info{
+                color:rgb(97, 247, 202);
+               .price{
+                font-size: 2rem;
+                
+            }
+
+           }
+           .product-qty{
+               color:#aaa;
+               font-size: 1.5rem;
+               input{
+                   width: 40px;
+                   text-align: center;
+                   border:1px solid #eee;
+                   font-size: 1.5rem;
+                   margin:5px 15px ;
+               }
+           }
+            
+        }
+    
+    }
+    
+    h3{
+        align-self: start;
+    }
+}

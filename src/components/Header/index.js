@@ -16,7 +16,7 @@ const Header=({cart})=>{
             </div>
             <div className='cart-container'>
                 <img src={cartImage} className='icon' alt=""/>
-                <sup>0</sup>
+                {cart.length>0?<sup>{cart.length}</sup>:null}
             </div>
         </header>
     );
