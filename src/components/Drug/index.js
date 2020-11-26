@@ -1,6 +1,7 @@
 import React from 'react'
 import {useState} from 'react'
 import './Drug.scss'
+import SERVER_ADDRESS from '../../server';
 const Drug=({product, cart, setCart})=>{
    
     const [count, setCount]=useState(1)
@@ -11,16 +12,17 @@ const Drug=({product, cart, setCart})=>{
         setCount(prev=>(count>1)?count-1:1)
     }
     const handleAddToCart=(newProduct, count)=>{
-        // if(cart.some(a=>a.id===newProduct.id)){
-        //     cart.map(b)
-        // }
-        setCart([...cart, {...newProduct, count:count}]);
-        
+        if(cart.some(a=>a.productId===newProduct.productId)){
+            setCart(cart.map(a=>a.productId===newProduct.productId?{...a, count:a.count+count}:a));
+        }
+        else{
+            setCart([...cart, {...newProduct, count:count}]);
+        }
     }
    
     return(
             <div className='product' key={product.name}>
-                <img src={product.image} alt=""/>
+                <img src={SERVER_ADDRESS+'/aptek.tj/'+product.image} alt=""/>
                 <h3>{product.name}</h3>
                 <span className="type">{product.type}</span>
                 <p>{product.description}</p>

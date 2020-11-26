@@ -1,32 +1,19 @@
 import React from 'react'
 import {useState, useEffect, useRef} from 'react'
-import {Redirect} from 'react-router-dom'
 import './Cart.scss'
 import Delete from './delete1.png'
 import SERVER_ADDRESS from '../../server';
-
 export default function Cart({cart, setCart}) {
 
     const [goodsPrice, setgoodsPrice]=useState(0);
     const [delivery, setDelivery]=useState(0);
     const [total, setTotal]=useState(0);
-    const [accepted, setAccepted]=useState(false);
-    const [redirect, setRedirect]=useState(false);
     const cityRef=useRef(null);
-    
+    const clientNameRef=useRef(null);
+    const clientAddressRef=useRef(null);
+    const phoneRef=useRef(null);
 
-    const [order, setOrder]=useState({
-            userAddress:'',
-            userNumber:'',
-            userName:'',
-            products:[],
-    });  
-
-    const handleCollectDrugs=(e)=>{
-
-        setOrder({...order, [e.target.name]:e.target.value});
-
-    }
+    const order={};  
     const handleAddCount=(clicked)=>{
       
         setCart(cart.map(a=>a.productId===clicked.productId?{...a, count:a.count+1}:a));
@@ -44,38 +31,27 @@ export default function Cart({cart, setCart}) {
     const handleDelivery=()=>{
         setDelivery(cityRef.current.value)
     }
-   useEffect(()=>{
-
-    setgoodsPrice(cart.map(a=>a.price*a.count).reduce((a,b)=>a+b, 0));
+  
+    useEffect(()=>{
+        setgoodsPrice(cart.map(a=>a.price*a.count).reduce((a,b)=>a+b,0));
+      },[cart])
    
-   },[cart])
    useEffect(()=>{
 
-    setTotal(+goodsPrice+ 8);
+   setTotal(+goodsPrice+ 8);
        
    },[goodsPrice, delivery]);
 
-//    useEffect(()=>{
-
-//         let drug=[];
-//         for(let dr of cart){
-//               drug.push({productId:dr.productId, count:dr.count})
-//             }
-//         setOrder({...order, products:drug})
-       
-//    },[cart]);
-
-   
-
    const handleNewOrder=(obj)=>{
+            let drug=[];
+            obj.userAddress=cityRef.current.value+', '+clientAddressRef.current.value;
+            obj.userNumber=phoneRef.current.value;
+            obj.userName=clientNameRef.current.value;
             
-        let drug=[];
-                
               for(let dr of cart){
                     drug.push({productId:dr.productId, count:dr.count})
             }
-            setOrder({...order, products:drug})
-            // obj.products=drug;
+            obj.products=drug;
         // console.log(obj);
         
         fetch('http://192.168.1.106:8080/api/v1/order', {
@@ -85,16 +61,8 @@ export default function Cart({cart, setCart}) {
                 'Content-Type': 'application/json'
                  },
             body: JSON.stringify(obj)
-                })
-                .then(res=>res.json())
-                .then(res => {setAccepted(true);
-                                setCart([]);
-                                setTimeout(()=>setRedirect(true), 1500)})
-                .catch(e=>console.log(e));
-
-                // .then(res => alert('Ваш заказ принят.'))
-                
-            
+                }).then(res=>res.json())
+                .then(res => console.log(res));
    }  
 
     return (
@@ -102,7 +70,7 @@ export default function Cart({cart, setCart}) {
           <div className='cart-header' >
               <header>
                    <span>Ваш счёт:</span>
-                   <span onClick={()=><Redirect  to='/' />}>Добавить ещё</span>
+                   <span>Добавить</span>
               </header>
           </div>
             {cart.map(product=>
@@ -128,7 +96,7 @@ export default function Cart({cart, setCart}) {
             )}
             <div className='destination'>
                 <label>Регион доставки:</label>
-                <select name="city"  ref={cityRef} onChange={handleCollectDrugs}>
+                <select name="city"  ref={cityRef} onChange={handleDelivery}>
                     <option value=""></option>
                     <option value='Мехробод'>Мехробод</option>
                     <option value="Гулякандоз">Гулякандоз</option>
@@ -155,12 +123,10 @@ export default function Cart({cart, setCart}) {
             </div>
             <div className='submit'>
                 <h3>Ваши данные</h3>
-                <input placeholder='Ваше имя' name='userName' onChange={handleCollectDrugs} autoComplete='off'/>
-                <input placeholder='Адрес доставки' name='userAddress' onChange={handleCollectDrugs} autoComplete='off'/>
-                <input placeholder='Номер телефона' name='userNumber' onChange={handleCollectDrugs}  autoComplete='off'/>
-                {accepted?<span className='orderAccepted'>Ваш заказ принят</span>:null}
+                <input placeholder='Ваше имя' ref={clientNameRef}/>
+                <input placeholder='Адрес доставки' ref={clientAddressRef} autoComplete='off'/>
+                <input placeholder='Номер телефона' ref={phoneRef}/>
                 <button onClick={()=>handleNewOrder(order)}>Оформить заказ</button>
-                {redirect?<Redirect to='/' />:null}
             </div>
         </div>
     )
